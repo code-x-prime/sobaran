@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-burgundy: #65000b;
+  --color-dark-burgundy: #3a0708;
+  --color-brown: #24130f;
+  --color-gold: #c99538;
+  --color-light-gold: #d9b05a;
+  --color-cream: #f7f0e3;
+  --color-ivory: #fffdf8;
+  --color-beige: #e8dcc7;
+  --color-muted: #6f6258;
+  --font-serif:
+    var(--font-cormorant), var(--font-devanagari-serif), var(--font-devanagari), Georgia, serif;
+  --font-sans: var(--font-manrope), var(--font-devanagari), Arial, sans-serif;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background: #fffdf8;
+    color: #24130f;
+    font-family: var(--font-manrope), var(--font-devanagari), Arial, sans-serif;
+  }
+  :is(a, button, input, textarea, select):focus-visible {
+    outline: 2px solid #c99538;
+    outline-offset: 3px;
+  }
+}
+
+/* Wide tracking breaks Devanagari conjuncts; keep it for Latin only. */
+:lang(hi) [class*="tracking-[0.1"],
+:lang(hi) [class*="tracking-[0.2"],
+:lang(hi) [class*="tracking-[0.3"] {
+  letter-spacing: 0.02em;
+}
