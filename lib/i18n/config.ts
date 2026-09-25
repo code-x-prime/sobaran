@@ -1,7 +1,7 @@
 export const languages = ["hi", "en"] as const;
 export type Language = (typeof languages)[number];
 
-export const defaultLanguage: Language = "hi";
+export const defaultLanguage: Language = "en";
 
 /** Shared by the cookie (read on the server) and localStorage (read on the client). */
 export const languageStorageKey = "sobaran-language";
