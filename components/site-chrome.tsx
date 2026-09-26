@@ -13,7 +13,6 @@ import {
   Menu,
   MessageCircle,
   Phone,
-  Search,
   X,
 } from "lucide-react";
 import { useEffect, useState, type ComponentType, type SVGProps } from "react";
@@ -190,18 +189,6 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link
-              href="/products"
-              aria-label={dict.nav.search}
-              className={`group hidden h-9 w-9 items-center justify-center rounded-lg transition-colors duration-300 sm:flex ${transparent ? "hover:bg-white/10" : "hover:bg-cream"}`}
-            >
-              <Search
-                size={17}
-                strokeWidth={1.8}
-                aria-hidden="true"
-                className="transition-transform duration-300 group-hover:scale-110"
-              />
-            </Link>
             <LanguageToggle dark={transparent} />
             <a
               href={whatsappHref}
