@@ -6,3 +6,4 @@ build
 coverage
 public/generated
 pnpm-lock.yaml
+.claude

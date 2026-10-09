@@ -93,7 +93,9 @@ export function ProductShowcase() {
                     href={`/products/${product.slug}`}
                     className={`group bg-ivory hover:border-gold/70 flex h-full flex-col overflow-hidden rounded-xl border border-[#e3d4ba] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(36,19,15,0.12)] ${wide ? "sm:grid sm:grid-cols-2" : ""}`}
                   >
-                    <div className="bg-beige relative aspect-square overflow-hidden">
+                    <div
+                      className={`bg-beige relative overflow-hidden ${wide ? "aspect-square lg:aspect-auto lg:h-full" : "aspect-square"}`}
+                    >
                       <Image
                         src={product.image}
                         alt={format(dict.common.servingAlt, { name: pick(product.name) })}
