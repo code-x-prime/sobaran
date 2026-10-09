@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { useLanguage } from "@/components/language";
@@ -18,7 +18,7 @@ export function ProductShowcase() {
   const copy = dict.home.showcase;
   const visible =
     active === "all"
-      ? products.slice(0, 4)
+      ? products.slice(0, 5)
       : products.filter((product) => product.category === active);
 
   return (
@@ -72,11 +72,12 @@ export function ProductShowcase() {
 
         <motion.div
           layout={!reduced}
-          className="-mx-4 mt-8 flex snap-x snap-mandatory [scrollbar-width:none] gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:mt-10 lg:grid-cols-[1.2fr_0.9fr_0.9fr] lg:grid-rows-[repeat(2,minmax(300px,auto))] lg:gap-5 [&::-webkit-scrollbar]:hidden"
+          className="-mx-4 mt-8 flex snap-x snap-mandatory [scrollbar-width:none] gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:mt-10 lg:grid-cols-3 lg:gap-5 [&::-webkit-scrollbar]:hidden"
         >
           <AnimatePresence mode="popLayout" initial={false}>
             {visible.map((product, index) => {
-              const featured = index === 0 && visible.length > 1;
+              // Unfiltered: the lead product spans two columns with image and text side by side.
+              const wide = active === "all" && index === 0;
               return (
                 <motion.article
                   key={product.id}
@@ -86,56 +87,55 @@ export function ProductShowcase() {
                   exit={reduced ? undefined : { opacity: 0, scale: 0.96 }}
                   viewport={{ once: true, amount: 0.15 }}
                   transition={{ duration: 0.6, delay: reduced ? 0 : index * 0.1, ease }}
-                  className={`w-[82vw] max-w-[380px] shrink-0 snap-start sm:w-auto sm:max-w-none ${featured ? "sm:col-span-2 lg:col-span-1 lg:row-span-2" : ""} ${index === 3 ? "lg:col-span-2" : ""}`}
+                  className={`w-[78vw] max-w-[360px] shrink-0 snap-start sm:w-auto sm:max-w-none ${wide ? "sm:col-span-2" : ""}`}
                 >
                   <Link
                     href={`/products/${product.slug}`}
-                    className={`group bg-beige hover:ring-gold/70 relative flex h-full min-h-[420px] flex-col justify-end overflow-hidden rounded-xl ring-1 ring-transparent transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(36,19,15,0.18)] ${featured ? "sm:min-h-[460px] lg:min-h-[640px]" : "sm:min-h-[340px] lg:min-h-0"}`}
+                    className={`group bg-ivory hover:border-gold/70 flex h-full flex-col overflow-hidden rounded-xl border border-[#e3d4ba] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(36,19,15,0.12)] ${wide ? "sm:grid sm:grid-cols-2" : ""}`}
                   >
-                    <Image
-                      src={product.image}
-                      alt={format(dict.common.servingAlt, { name: pick(product.name) })}
-                      fill
-                      sizes={
-                        featured
-                          ? "(max-width: 1024px) 90vw, 42vw"
-                          : "(max-width: 640px) 82vw, (max-width: 1024px) 45vw, 30vw"
-                      }
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                    />
-                    <div className="from-brown/90 via-brown/25 absolute inset-0 bg-gradient-to-t to-transparent" />
-                    <span className="bg-ivory/90 text-burgundy absolute top-4 left-4 rounded-md px-2.5 py-1 text-[11px] font-semibold backdrop-blur">
-                      {dict.categories[product.category]}
-                    </span>
-                    <span className="border-ivory/30 text-ivory group-hover:bg-light-gold group-hover:border-light-gold group-hover:text-dark-burgundy absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-lg border backdrop-blur-sm transition-all duration-300">
-                      <ArrowUpRight
-                        size={16}
-                        aria-hidden="true"
-                        className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    <div className="bg-beige relative aspect-square overflow-hidden">
+                      <Image
+                        src={product.image}
+                        alt={format(dict.common.servingAlt, { name: pick(product.name) })}
+                        fill
+                        sizes={
+                          wide
+                            ? "(max-width: 640px) 78vw, (max-width: 1024px) 45vw, 33vw"
+                            : "(max-width: 640px) 78vw, (max-width: 1024px) 45vw, 30vw"
+                        }
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                       />
-                    </span>
-                    <div className="text-ivory relative p-5 sm:p-6 lg:p-7">
+                      <span className="bg-ivory/90 text-burgundy absolute top-4 left-4 rounded-md px-2.5 py-1 text-[11px] font-semibold backdrop-blur">
+                        {dict.categories[product.category]}
+                      </span>
+                      {product.comingSoon && (
+                        <span className="bg-burgundy/90 text-light-gold absolute top-4 right-4 rounded-md px-2.5 py-1 text-[11px] font-semibold backdrop-blur">
+                          {dict.common.comingSoon}
+                        </span>
+                      )}
+                    </div>
+                    <div
+                      className={`flex flex-1 flex-col p-5 sm:p-6 ${wide ? "sm:justify-center lg:p-10" : ""}`}
+                    >
+                      <p className="text-gold text-xs font-semibold tracking-[0.12em]">
+                        {product.packSizes.join(" · ")}
+                      </p>
                       <h3
-                        className={`font-serif leading-tight ${featured ? "text-[2rem] lg:text-[2.6rem]" : "text-[1.75rem]"}`}
+                        className={`text-burgundy mt-2 font-serif leading-tight ${wide ? "text-[1.9rem] lg:text-[2.4rem]" : "text-[1.6rem]"}`}
                       >
                         {pick(product.name)}
                       </h3>
-                      <p className="mt-2 max-w-sm text-sm leading-6 text-white/80">
+                      <p className="text-muted mt-2 max-w-sm text-sm leading-6">
                         {pick(product.description)}
                       </p>
-                      <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/15 pt-4">
-                        <span className="text-light-gold text-xs tracking-[0.12em]">
-                          {product.packSizes.join(" · ")}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold">
-                          {dict.common.viewProduct}
-                          <ArrowRight
-                            size={14}
-                            aria-hidden="true"
-                            className="transition-transform duration-300 group-hover:translate-x-1"
-                          />
-                        </span>
-                      </div>
+                      <span className="text-burgundy mt-auto inline-flex items-center gap-1.5 pt-5 text-[13px] font-semibold">
+                        {dict.common.viewProduct}
+                        <ArrowRight
+                          size={14}
+                          aria-hidden="true"
+                          className="transition-transform duration-300 group-hover:translate-x-1"
+                        />
+                      </span>
                     </div>
                   </Link>
                 </motion.article>

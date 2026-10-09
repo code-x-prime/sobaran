@@ -96,7 +96,9 @@ export function ProductCatalog() {
                   href={`/products/${product.slug}`}
                   className={`group bg-ivory hover:border-gold/70 block h-full overflow-hidden rounded-xl border border-[#e3d4ba] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_22px_45px_rgba(36,19,15,0.1)] ${wide ? "xl:grid xl:grid-cols-2" : ""}`}
                 >
-                  <div className={`bg-beige relative aspect-square overflow-hidden`}>
+                  <div
+                    className={`bg-beige relative overflow-hidden ${wide ? "aspect-square xl:aspect-auto xl:h-full" : "aspect-square"}`}
+                  >
                     <Image
                       src={product.image}
                       alt={format(dict.common.servingAlt, { name: pick(product.name) })}
