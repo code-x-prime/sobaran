@@ -97,6 +97,7 @@ export const en: Dictionary = {
     breakfast: "Breakfast",
     millets: "Millets",
     beverages: "Beverages",
+    wellness: "Amla Range",
   },
 
   footer: {
@@ -290,7 +291,7 @@ export const en: Dictionary = {
     description: "Taste and quality you can trust, for every meal.",
     browse: "Browse products",
     rangeLabel: "Our range",
-    range: "Masalas · Breakfast · Millets · Beverages",
+    range: "Masalas · Chai · Amla · Breakfast",
     featured: {
       eyebrow: "Our signature",
       cta: "See full details",

@@ -109,6 +109,11 @@ export function ProductCatalog() {
                     <span className="bg-ivory/90 text-burgundy absolute top-4 left-4 rounded-md px-2.5 py-1 text-[11px] font-semibold backdrop-blur">
                       {dict.categories[product.category]}
                     </span>
+                    {product.comingSoon && (
+                      <span className="bg-burgundy/90 text-light-gold absolute top-4 right-4 rounded-md px-2.5 py-1 text-[11px] font-semibold backdrop-blur">
+                        {dict.common.comingSoon}
+                      </span>
+                    )}
                   </div>
                   <div
                     className={`flex flex-col p-6 sm:p-7 ${wide ? "xl:justify-center xl:p-10" : ""}`}

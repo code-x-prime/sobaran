@@ -101,9 +101,16 @@ export function ProductDetailContent({ slug }: { slug: string }) {
             <div className="mt-6 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
               <ProductGallery name={pick(product.name)} images={product.images} />
               <Reveal delay={0.1}>
-                <span className="bg-burgundy/[0.06] text-burgundy inline-flex rounded-md px-2.5 py-1 text-xs font-semibold">
-                  {dict.categories[product.category]}
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="bg-burgundy/[0.06] text-burgundy inline-flex rounded-md px-2.5 py-1 text-xs font-semibold">
+                    {dict.categories[product.category]}
+                  </span>
+                  {product.comingSoon && (
+                    <span className="bg-gold/15 text-gold inline-flex rounded-md px-2.5 py-1 text-xs font-semibold">
+                      {dict.common.comingSoon}
+                    </span>
+                  )}
+                </div>
                 <h1 className="text-burgundy mt-4 font-serif text-[clamp(2.4rem,4.6vw,4rem)] leading-[1.18]">
                   {pick(product.name)}
                 </h1>

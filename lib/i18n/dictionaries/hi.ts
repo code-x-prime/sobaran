@@ -98,6 +98,7 @@ export const hi = {
     breakfast: "नाश्ता",
     millets: "मिलेट्स",
     beverages: "पेय",
+    wellness: "आंवला रेंज",
   },
 
   footer: {
@@ -286,7 +287,7 @@ export const hi = {
     description: "हर भोजन के लिए स्वाद और गुणवत्ता का भरोसा।",
     browse: "उत्पाद देखें",
     rangeLabel: "हमारी रेंज",
-    range: "मसाले · नाश्ता · मिलेट्स · पेय",
+    range: "मसाले · चाय · आंवला · नाश्ता",
     featured: {
       eyebrow: "हमारा खास उत्पाद",
       cta: "पूरी जानकारी देखें",
