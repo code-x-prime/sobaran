@@ -6,8 +6,11 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Leaf } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { useLanguage } from "@/components/language";
-import { products } from "@/data/products";
+import { products as allProducts } from "@/data/products";
 import { format } from "@/lib/i18n";
+
+/** Launched products only — coming-soon items stay out of the hero rotation. */
+const products = allProducts.filter((product) => !product.comingSoon);
 
 const ease = [0.22, 0.7, 0.2, 1] as const;
 
@@ -208,7 +211,7 @@ export function HeroMobileVisual() {
     <div className="mt-5 max-w-[520px] lg:hidden" aria-roledescription="carousel">
       <Link
         href={`/products/${product.slug}`}
-        className="group relative block aspect-[16/10] overflow-hidden rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.35)] ring-1 ring-white/15"
+        className="group relative block aspect-[5/4] overflow-hidden rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.35)] ring-1 ring-white/15"
       >
         <StackedImages active={active} sizes="(max-width: 640px) 92vw, 520px" />
         <div className="from-brown/85 absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />

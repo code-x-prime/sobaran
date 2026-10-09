@@ -80,8 +80,8 @@ export function ProductCatalog() {
       <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         <AnimatePresence mode="popLayout" initial={false}>
           {matches.map((product, index) => {
-            // Asymmetric rhythm when unfiltered: wide, medium, medium, wide.
-            const wide = featured && (index === 0 || index === matches.length - 1);
+            // When unfiltered the lead product spans two columns on wide screens; the rest stay square.
+            const wide = featured && index === 0;
             return (
               <motion.article
                 key={product.slug}
@@ -90,15 +90,13 @@ export function ProductCatalog() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={reduced ? undefined : { opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.4 }}
-                className={wide ? "md:col-span-2" : ""}
+                className={wide ? "xl:col-span-2" : ""}
               >
                 <Link
                   href={`/products/${product.slug}`}
                   className={`group bg-ivory hover:border-gold/70 block h-full overflow-hidden rounded-xl border border-[#e3d4ba] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_22px_45px_rgba(36,19,15,0.1)] ${wide ? "xl:grid xl:grid-cols-2" : ""}`}
                 >
-                  <div
-                    className={`bg-beige relative overflow-hidden ${wide ? "aspect-[4/3] xl:aspect-auto xl:h-full" : "aspect-[4/3]"}`}
-                  >
+                  <div className={`bg-beige relative aspect-square overflow-hidden`}>
                     <Image
                       src={product.image}
                       alt={format(dict.common.servingAlt, { name: pick(product.name) })}
