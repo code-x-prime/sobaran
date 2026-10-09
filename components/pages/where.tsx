@@ -13,8 +13,8 @@ import { Eyebrow, IconBadge, container, h2Class, sectionY } from "@/components/p
 import { site } from "@/data/site";
 
 const cities = [
-  { key: "pratapgarh", image: "/images/gallery-market.jpg" },
-  { key: "prayagraj", image: "/images/gallery-spices.jpg" },
+  { key: "pratapgarh", image: "/images/places/pratapgarh.jpg" },
+  { key: "prayagraj", image: "/images/places/prayagraj.jpg" },
 ] as const;
 
 /**
@@ -131,7 +131,7 @@ export function WhereContent() {
       eyebrow={w.eyebrow}
       title={w.title}
       description={w.description}
-      image="/images/gallery-market.jpg"
+      image="/images/places/prayagraj.jpg"
       imageAlt={w.heroImageAlt}
       actions={
         <ActionLink href={whatsappHref} variant="gold" icon={<MessageCircle size={16} />}>

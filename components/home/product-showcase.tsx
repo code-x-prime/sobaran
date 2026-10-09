@@ -130,7 +130,9 @@ export function ProductShowcase() {
                       <p className="text-muted mt-2 max-w-sm text-sm leading-6">
                         {pick(product.description)}
                       </p>
-                      <span className="text-burgundy mt-auto inline-flex items-center gap-1.5 pt-5 text-[13px] font-semibold">
+                      <span
+                        className={`text-burgundy inline-flex items-center gap-1.5 text-[13px] font-semibold ${wide ? "mt-6" : "mt-auto pt-5"}`}
+                      >
                         {dict.common.viewProduct}
                         <ArrowRight
                           size={14}

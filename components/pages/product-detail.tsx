@@ -214,7 +214,7 @@ export function ProductDetailContent({ slug }: { slug: string }) {
         {/* Product story */}
         <section className={`bg-cream ${sectionY}`}>
           <div className={`${container} grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16`}>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+            <div className="relative aspect-square overflow-hidden rounded-2xl">
               <Image
                 src={product.images[1] ?? product.image}
                 alt={format(dict.common.servingAlt, { name: pick(product.name) })}

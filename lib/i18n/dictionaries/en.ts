@@ -163,17 +163,17 @@ export const en: Dictionary = {
         {
           title: "A taste for every morning",
           body: "An easy start with breakfast.",
-          alt: "Upma breakfast served on a plate",
+          alt: "Sattu Upma Poha pack with a bowl of upma poha",
         },
         {
           title: "Trust in every day",
           body: "The familiar taste of daily meals.",
-          alt: "Home cooking in a kadai",
+          alt: "Dardara Sabzi Masala jar with fresh vegetables",
         },
         {
           title: "Warmth for every evening",
           body: "Calm moments over a cup of chai.",
-          alt: "Masala chai on a table",
+          alt: "Dardara Chai Masala pack beside a cup of masala chai",
         },
       ],
     },
@@ -190,7 +190,7 @@ export const en: Dictionary = {
       packLabel: "Pack sizes",
       points: ["Selected ingredients", "Balanced taste", "Premium packaging"],
       note: "Official pack photography coming soon.",
-      imageAlt: "Vegetable sabzi made with Dardara Sabzi Masala — serving suggestion",
+      imageAlt: "Dardara Sabzi Masala 200g jar with fresh vegetables",
     },
     ingredient: {
       eyebrow: "An ingredient story",
@@ -253,19 +253,18 @@ export const en: Dictionary = {
       title: "Moments around food.",
       note: "Official social handles will be added soon.",
       alts: [
-        "Home cooking in a kadai",
-        "Masala chai on a table",
-        "Fresh Indian market vegetables",
-        "Whole spices in a stone mortar",
-        "Tea masala ingredients",
-        "A bowl of millet khichdi",
+        "Dardara Sabzi Masala jar with fresh vegetables",
+        "Amla Candy jar with fresh amla",
+        "Sattu Upma Poha pack",
+        "Soya Badi pack",
+        "Dardara Chai Masala pack with a cup of chai",
       ],
       view: "View on Instagram",
     },
     final: {
       title: "A taste of SOBARAN\nin every kitchen.",
       secondary: "About us",
-      imageAlt: "Indian meal with vegetable sabzi and flatbread",
+      imageAlt: "SOBARAN Dardara Sabzi Masala jar, Amla Candy jar and Sattu Upma Poha pack",
     },
   },
 
@@ -274,13 +273,13 @@ export const en: Dictionary = {
       name: "Pratapgarh",
       note: "Uttar Pradesh · Where we began",
       description: "Where SOBARAN began. Contact us for local availability.",
-      imageAlt: "Fresh vegetables at a local Indian market",
+      imageAlt: "Fresh amla gooseberries heaped in baskets at harvest",
     },
     prayagraj: {
       name: "Prayagraj",
       note: "Uttar Pradesh · Confirm availability",
       description: "Our next stop after Pratapgarh. Please confirm availability before visiting.",
-      imageAlt: "Whole spices in a stone mortar",
+      imageAlt: "Wooden boats on the river at sunrise",
     },
   },
 
@@ -375,7 +374,7 @@ export const en: Dictionary = {
           body: "Spices, breakfast, millets and beverages — a considered beginning.",
         },
       ],
-      imageAlt: "Hands preparing spices in an Indian home kitchen",
+      imageAlt: "Fresh amla gooseberries heaped in baskets at harvest",
     },
     philosophy: {
       eyebrow: "Our philosophy",
@@ -406,7 +405,11 @@ export const en: Dictionary = {
       title: "Taste today,\nmuch more tomorrow.",
       body: "Our current range is a beginning. We want to bring new products for more needs of the Indian kitchen — with the same thinking and quality.",
       note: "Information about new products will be shared on this website when available.",
-      alts: ["Turmeric and whole spices", "A bowl of millet khichdi", "Masala chai with biscuits"],
+      alts: [
+        "Dardara Sabzi Masala jar with fresh vegetables",
+        "Amla Candy jar with fresh amla",
+        "Soya Badi pack",
+      ],
     },
     cta: {
       title: "Discover our products",
@@ -463,7 +466,7 @@ export const en: Dictionary = {
         "Preserving aroma and freshness",
         "Clean, careful handling",
       ],
-      imageAlt: "Tea masala ingredients",
+      imageAlt: "Dardara Sabzi Masala 100g carton",
     },
     promise: {
       eyebrow: "Our promise",

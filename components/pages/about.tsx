@@ -75,7 +75,7 @@ export function AboutContent() {
             className="relative aspect-[4/3] overflow-hidden rounded-2xl lg:order-2 lg:aspect-[4/5]"
           >
             <Image
-              src={site.storyImage}
+              src="/images/places/pratapgarh.jpg"
               alt={a.pratapgarh.imageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -193,23 +193,25 @@ export function AboutContent() {
             </p>
           </Reveal>
           <div className="grid grid-cols-[1.1fr_0.9fr] gap-3 sm:gap-4">
-            {[site.ingredientImage, "/images/khichdi.jpg", "/images/gallery-chai.jpg"].map(
-              (src, index) => (
-                <Reveal
-                  key={src}
-                  delay={index * 0.12}
-                  className={`relative overflow-hidden rounded-xl ${index === 0 ? "row-span-2 aspect-[3/4] sm:aspect-auto" : "aspect-square"}`}
-                >
-                  <Image
-                    src={src}
-                    alt={a.future.alts[index]}
-                    fill
-                    sizes="(max-width: 1024px) 50vw, 30vw"
-                    className="object-cover transition-transform duration-700 hover:scale-[1.04]"
-                  />
-                </Reveal>
-              ),
-            )}
+            {[
+              "/images/products/dardara-sabzi-masala-portrait.jpg",
+              "/images/products/amla-candy.jpg",
+              "/images/products/soya-badi.jpg",
+            ].map((src, index) => (
+              <Reveal
+                key={src}
+                delay={index * 0.12}
+                className={`relative overflow-hidden rounded-xl ${index === 0 ? "row-span-2 aspect-[3/4] sm:aspect-auto" : "aspect-square"}`}
+              >
+                <Image
+                  src={src}
+                  alt={a.future.alts[index]}
+                  fill
+                  sizes="(max-width: 1024px) 50vw, 30vw"
+                  className="object-cover transition-transform duration-700 hover:scale-[1.04]"
+                />
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

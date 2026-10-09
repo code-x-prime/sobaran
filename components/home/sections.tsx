@@ -274,16 +274,14 @@ export function BrandPromise() {
 }
 
 /* 07 · Food moments -------------------------------------------------------- */
+/** Product packs shown for breakfast, everyday meals and the evening cup. */
+const momentSlugs = ["sattu-upma-poha", "dardara-sabzi-masala", "dardara-chai-masala"];
+
 export function FoodMoments() {
   const c = useHomeCopy();
+  const { pick } = useLanguage();
   const moments = c.dict.home.moments;
-  const images = ["/images/upma.jpg", "/images/gallery-cooking.jpg", "/images/gallery-chai.jpg"];
   const icons = [Sunrise, UtensilsCrossed, Coffee];
-  const ratios = [
-    "aspect-[4/3] lg:aspect-[4/5]",
-    "aspect-[4/5] lg:aspect-[3/4]",
-    "aspect-[4/5] lg:aspect-[4/5]",
-  ];
   return (
     <section className="bg-cream py-16 md:py-20 lg:py-24">
       <div className={container}>
@@ -293,31 +291,50 @@ export function FoodMoments() {
             {moments.title}
           </h2>
         </div>
-        <RevealGroup className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-[1.15fr_0.85fr_1fr] lg:items-end">
+        <RevealGroup className="-mx-4 mt-10 flex snap-x snap-mandatory [scrollbar-width:none] gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 sm:pb-0 lg:gap-5 [&::-webkit-scrollbar]:hidden">
           {moments.items.map((moment, index) => {
             const Icon = icons[index];
+            const product = products.find((item) => item.slug === momentSlugs[index]);
+            if (!product) return null;
             return (
               <RevealItem
                 key={moment.title}
-                className={`group relative overflow-hidden rounded-2xl ${index === 0 ? "md:col-span-2 lg:col-span-1" : ""}`}
+                className="w-[78vw] max-w-[360px] shrink-0 snap-start sm:w-auto sm:max-w-none"
               >
-                <div className={`relative overflow-hidden ${ratios[index]}`}>
-                  <Image
-                    src={images[index]}
-                    alt={moment.alt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 34vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                  />
-                  <div className="from-brown/85 via-brown/20 absolute inset-0 bg-gradient-to-t to-transparent" />
-                </div>
-                <div className="text-ivory absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                  <span className="border-light-gold/40 text-light-gold bg-brown/40 flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-sm transition-transform duration-500 group-hover:-translate-y-1">
-                    <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
-                  </span>
-                  <h3 className="mt-4 font-serif text-[1.7rem] leading-tight">{moment.title}</h3>
-                  <p className="mt-1 text-sm text-white/80">{moment.body}</p>
-                </div>
+                <Link
+                  href={`/products/${product.slug}`}
+                  className="group bg-ivory hover:border-gold/70 flex h-full flex-col overflow-hidden rounded-2xl border border-[#e3d4ba] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_22px_45px_rgba(36,19,15,0.1)]"
+                >
+                  <div className="bg-beige relative aspect-square overflow-hidden">
+                    <Image
+                      src={product.image}
+                      alt={moment.alt}
+                      fill
+                      sizes="(max-width: 640px) 78vw, 33vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    />
+                    <span className="border-light-gold/50 text-light-gold bg-brown/60 absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-sm">
+                      <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col p-5 sm:p-6">
+                    <p className="text-gold text-xs font-semibold tracking-[0.12em]">
+                      {pick(product.name)}
+                    </p>
+                    <h3 className="text-burgundy mt-2 font-serif text-[1.6rem] leading-tight">
+                      {moment.title}
+                    </h3>
+                    <p className="text-muted mt-2 text-sm leading-6">{moment.body}</p>
+                    <span className="text-burgundy mt-auto inline-flex items-center gap-1.5 pt-5 text-[13px] font-semibold">
+                      {c.viewProduct}
+                      <ArrowRight
+                        size={14}
+                        aria-hidden="true"
+                        className="transition-transform duration-300 group-hover:translate-x-1"
+                      />
+                    </span>
+                  </div>
+                </Link>
               </RevealItem>
             );
           })}
@@ -353,7 +370,7 @@ export function SignatureProduct() {
           <div className="border-light-gold/40 absolute -top-4 -left-4 h-full w-full rounded-xl border" />
           <div className="group bg-dark-burgundy relative aspect-[4/5] overflow-hidden rounded-xl shadow-[0_30px_60px_rgba(0,0,0,0.3)]">
             <Image
-              src={product.image}
+              src={product.portraitImage ?? product.image}
               alt={c.dict.home.signature.imageAlt}
               fill
               sizes="(max-width: 1024px) 90vw, 40vw"
@@ -552,8 +569,8 @@ export function WhereToBuy() {
   const whatsappHref = useWhatsappHref();
   const c = useHomeCopy();
   const cities = [
-    { key: "pratapgarh", image: "/images/gallery-market.jpg" },
-    { key: "prayagraj", image: "/images/gallery-spices.jpg" },
+    { key: "pratapgarh", image: "/images/places/pratapgarh.jpg" },
+    { key: "prayagraj", image: "/images/places/prayagraj.jpg" },
   ] as const;
   return (
     <section className="bg-cream relative overflow-hidden py-16 md:py-20 lg:py-24" id="where">
@@ -708,26 +725,17 @@ export function BusinessCTA() {
 }
 
 /* 13 · Social -------------------------------------------------------------- */
+const galleryImages = [
+  "/images/products/dardara-sabzi-masala.jpg",
+  "/images/products/amla-candy.jpg",
+  "/images/products/sattu-upma-poha.jpg",
+  "/images/products/soya-badi.jpg",
+  "/images/products/dardara-chai-masala.jpg",
+];
+
 export function SocialGallery() {
   const c = useHomeCopy();
   const instagram: string | null = site.instagram;
-  const images = [
-    "/images/gallery-cooking.jpg",
-    "/images/gallery-chai.jpg",
-    "/images/gallery-market.jpg",
-    "/images/gallery-spices.jpg",
-    "/images/tea-masala.jpg",
-    "/images/khichdi.jpg",
-  ];
-  // Masonry on desktop: 4 columns x 3 rows, filled exactly by these spans.
-  const spans = [
-    "lg:col-span-2 lg:row-span-2",
-    "lg:row-span-2",
-    "",
-    "",
-    "lg:col-span-2",
-    "lg:col-span-2",
-  ];
   return (
     <section className="bg-ivory py-16 md:py-20 lg:py-24">
       <div className={`${container} flex flex-wrap items-end justify-between gap-5`}>
@@ -740,18 +748,21 @@ export function SocialGallery() {
           {c.dict.home.gallery.note}
         </p>
       </div>
+      {/* Mobile: swipe row of squares. Desktop: one large tile beside a 2x2 block of squares. */}
       <RevealGroup
-        className="mt-8 flex snap-x snap-mandatory scroll-px-4 [scrollbar-width:none] gap-3 overflow-x-auto px-4 pb-2 sm:scroll-px-6 sm:px-6 lg:mx-auto lg:grid lg:max-w-[1400px] lg:auto-rows-[200px] lg:grid-cols-4 lg:gap-4 lg:overflow-visible lg:px-10 xl:auto-rows-[230px] [&::-webkit-scrollbar]:hidden"
+        className="mt-8 flex snap-x snap-mandatory scroll-px-4 [scrollbar-width:none] gap-3 overflow-x-auto px-4 pb-2 sm:scroll-px-6 sm:px-6 lg:mx-auto lg:grid lg:max-w-[1400px] lg:grid-cols-4 lg:gap-4 lg:overflow-visible lg:px-10 [&::-webkit-scrollbar]:hidden"
         stagger={0.07}
       >
-        {images.map((src, index) => {
+        {galleryImages.map((src, index) => {
           const tile = (
             <>
               <Image
                 src={src}
                 alt={c.dict.home.gallery.alts[index]}
                 fill
-                sizes="(max-width: 1024px) 70vw, 50vw"
+                sizes={
+                  index === 0 ? "(max-width: 1024px) 70vw, 50vw" : "(max-width: 1024px) 70vw, 25vw"
+                }
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
               />
               <div className="bg-brown/0 group-hover:bg-brown/45 absolute inset-0 transition-colors duration-500" />
@@ -766,7 +777,7 @@ export function SocialGallery() {
           return (
             <RevealItem
               key={src}
-              className={`group bg-beige relative aspect-[4/5] w-[70vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-xl sm:w-[42vw] lg:aspect-auto lg:w-auto lg:max-w-none ${spans[index]}`}
+              className={`group bg-beige relative aspect-square w-[70vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-xl sm:w-[42vw] lg:w-auto lg:max-w-none ${index === 0 ? "lg:col-span-2 lg:row-span-2 lg:aspect-auto" : ""}`}
             >
               {instagram ? (
                 <a
@@ -790,20 +801,27 @@ export function SocialGallery() {
 }
 
 /* 12 · Final campaign ------------------------------------------------------ */
+/** Three client pack shots, overlapped like a shelf display. */
+const finalPacks = [
+  { src: "/images/products/dardara-sabzi-masala.jpg", className: "top-0 left-0 w-[58%]" },
+  { src: "/images/products/sattu-upma-poha.jpg", className: "top-[3%] right-0 w-[38%]" },
+  { src: "/images/products/amla-candy.jpg", className: "right-[6%] bottom-0 w-[44%]" },
+];
+
 export function FinalCampaign() {
   const c = useHomeCopy();
   return (
-    <section className="bg-brown text-ivory relative flex min-h-[520px] items-center overflow-hidden py-20 lg:min-h-[600px]">
-      <Image
-        src={site.finalImage}
-        alt={c.dict.home.final.imageAlt}
-        fill
-        sizes="100vw"
-        data-parallax
-        className="scale-110 object-cover object-[65%_center]"
-      />
-      <div className="from-brown/95 via-brown/60 absolute inset-0 bg-gradient-to-r to-transparent" />
-      <div className={`${container} relative`}>
+    <section className="bg-dark-burgundy text-ivory relative overflow-hidden py-16 md:py-20 lg:py-24">
+      <span
+        data-drift
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-[6vw] left-0 font-serif text-[30vw] leading-none whitespace-nowrap text-white/[0.03] select-none lg:text-[20vw]"
+      >
+        SOBARAN
+      </span>
+      <div
+        className={`${container} relative grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16`}
+      >
         <Reveal>
           <Image
             src={site.logoGold}
@@ -813,9 +831,10 @@ export function FinalCampaign() {
             sizes="120px"
             className="h-16 w-auto sm:h-20"
           />
-          <h2 className="mt-6 max-w-3xl font-serif text-[clamp(2.5rem,5.4vw,5rem)] leading-[1.18] whitespace-pre-line">
+          <h2 className="mt-6 max-w-3xl font-serif text-[clamp(2.5rem,5vw,4.6rem)] leading-[1.18] whitespace-pre-line">
             {c.finalTitle}
           </h2>
+          <GoldLine className="bg-light-gold mt-6 w-20" />
           <div className="mt-8 flex flex-wrap gap-3">
             <ActionLink href="/products" variant="gold">
               {c.explore}
@@ -823,6 +842,28 @@ export function FinalCampaign() {
             <ActionLink href="/about" variant="outlineLight">
               {c.finalSecondary}
             </ActionLink>
+          </div>
+        </Reveal>
+        <Reveal delay={0.15}>
+          <div
+            role="img"
+            aria-label={c.dict.home.final.imageAlt}
+            className="relative mx-auto aspect-[5/4] w-full max-w-[560px]"
+          >
+            {finalPacks.map((pack) => (
+              <div
+                key={pack.src}
+                className={`ring-dark-burgundy absolute aspect-square overflow-hidden rounded-2xl shadow-[0_24px_50px_rgba(0,0,0,0.4)] ring-4 ${pack.className}`}
+              >
+                <Image
+                  src={pack.src}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 50vw, 300px"
+                  className="object-cover"
+                />
+              </div>
+            ))}
           </div>
         </Reveal>
       </div>

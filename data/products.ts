@@ -25,6 +25,8 @@ export type Product = {
   detail: Localized;
   packSizes: string[];
   image: string;
+  /** Optional 4:5 frame for tall slots (homepage signature section). */
+  portraitImage?: string;
   images: string[];
   /** Official values are not available yet — null renders a "from the pack label" note. */
   mrp: Localized | null;
@@ -53,7 +55,11 @@ export const products: Product[] = [
     },
     packSizes: ["50g", "100g", "200g"],
     image: "/images/products/dardara-sabzi-masala.jpg",
-    images: ["/images/products/dardara-sabzi-masala.jpg", "/images/ingredients.jpg"],
+    portraitImage: "/images/products/dardara-sabzi-masala-portrait.jpg",
+    images: [
+      "/images/products/dardara-sabzi-masala.jpg",
+      "/images/products/dardara-sabzi-masala-box.jpg",
+    ],
     mrp: null,
     ingredients: null,
     storage: null,

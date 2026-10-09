@@ -208,12 +208,12 @@ export function HeroMobileVisual() {
   const product = products[active];
   const badge = useBadge(active);
   return (
-    <div className="mt-5 max-w-[520px] lg:hidden" aria-roledescription="carousel">
+    <div className="mt-5 max-w-[420px] lg:hidden" aria-roledescription="carousel">
       <Link
         href={`/products/${product.slug}`}
-        className="group relative block aspect-[5/4] overflow-hidden rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.35)] ring-1 ring-white/15"
+        className="group relative block aspect-square overflow-hidden rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.35)] ring-1 ring-white/15"
       >
-        <StackedImages active={active} sizes="(max-width: 640px) 92vw, 520px" />
+        <StackedImages active={active} sizes="(max-width: 640px) 92vw, 420px" />
         <div className="from-brown/85 absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
         <span className="bg-light-gold text-dark-burgundy absolute top-3 left-3 rounded-md px-2.5 py-1 text-[10px] font-bold tracking-[0.12em] uppercase">
           {badge}

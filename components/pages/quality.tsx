@@ -120,9 +120,9 @@ export function QualityContent() {
       <section className={`bg-ivory ${sectionY}`}>
         <div className={`${container} grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16`}>
           <div className="relative">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+            <div className="relative aspect-square overflow-hidden rounded-2xl">
               <Image
-                src="/images/tea-masala.jpg"
+                src="/images/products/dardara-sabzi-masala-box.jpg"
                 alt={q.packaging.imageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
